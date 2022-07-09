@@ -1,7 +1,8 @@
-import styles from 'styled-components'
+import styles, {keyframes} from 'styled-components'
 import logo from '../../assets/logo.svg';
 import iconArrow from '../../assets/icon.svg';
 import ReactSelect from "react-select";
+import loader from '../../assets/loader.svg';
 
 export const AppWrapper = styles.div`
 width: 100%;
@@ -59,7 +60,7 @@ export const InfoWrapper = styles.div`
 width: 100%;
 height: 100%;
 `
-export const FormWrapper = styles.div`
+export const FormWrapper = styles.form`
 display: flex;
 flex-direction: column;
 align-items: flex-start;
@@ -67,7 +68,7 @@ padding: 40px 30px;
 gap: 20px;
 
 width: 440px;
-height: 466px;
+height: fit-content;
 
 background: #FFFFFF;
 box-shadow: 0px 5px 20px rgba(53, 50, 56, 0.14);
@@ -144,6 +145,28 @@ flex-flow: column nowrap;
 position: relative;
 &:focus{
     border: 2px solid red;
+}
+
+.InputMask{
+    background: #FFFFFF;
+    width: ${(props:any) => props.big ? "410px" : "180px"};
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 15px;
+    gap: 10px;
+    border: 2px solid ${(props:any) => props.danger ? "#EB5E55" : "#E3E3E3"};
+    border-radius: 8px;
+    transition: all linear 0.3s;
+    &:focus{
+        outline: none;
+        border: 2px solid ${(props:any) => props.danger ? "#EB5E55" : "#0086A8"};
+    }
+    
+    &:hover {
+        outline: none;
+        border:2px solid ${(props:any) => props.danger ? "#EB5E55" : "#0086A8"};
+    }  
 }
 
 .block_for_select{
@@ -260,7 +283,7 @@ export const Selected = styles(ReactSelect)`
     width: 440px;
     height: 50px;
     
-    border: 2px solid #E3E3E3;
+    border: 2px solid ${(props:any) => props.danger ? "#EB5E55" : "#0086A8"};
     border-radius: 8px;
     appearance: none;
     background: none;
@@ -316,3 +339,62 @@ export const Selected = styles(ReactSelect)`
     background: white;
 }
 `
+export const Button = styles.button`
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 18px 25px;
+gap: 10px;
+border: none;
+width: 440px;
+height: 50px;
+
+background: ${(props:any) => (props.blue == true && props.blue !== null) ? "#E3E3E3" : "#0086A8"};
+border-radius: 8px;
+
+/* Inside auto layout */
+cursor: pointer;
+flex: none;
+order: 7;
+align-self: stretch;
+flex-grow: 0;
+color: #828282;
+transition: all linear 0.3s;
+span{
+    width: 129px;
+    height: 14px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+&:hover{
+    background: #0086A8;
+    color: white;
+}
+`
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+export const Spinner = styles.div`
+background-image: url(${loader});
+background-repeat: no-repeat;
+background-size: 30px;
+height: 30px;
+width: 30px;
+animation: ${rotate} 1.4s linear infinite;
+`
+
