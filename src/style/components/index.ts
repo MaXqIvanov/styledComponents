@@ -3,6 +3,7 @@ import logo from '../../assets/logo.svg';
 import iconArrow from '../../assets/icon.svg';
 import ReactSelect from "react-select";
 import loader from '../../assets/loader.svg';
+import InputMask from 'react-input-mask';
 
 export const AppWrapper = styles.div`
 width: 100%;
@@ -139,15 +140,7 @@ font-weight: 400;
 font-size: 12px;
 line-height: 100%;`
 
-export const FieldList = styles.div`
-display: flex;
-flex-flow: column nowrap;
-position: relative;
-&:focus{
-    border: 2px solid red;
-}
-
-.InputMask{
+export const InputMasks = styles(InputMask)`
     background: #FFFFFF;
     width: ${(props:any) => props.big ? "410px" : "180px"};
     display: flex;
@@ -167,6 +160,14 @@ position: relative;
         outline: none;
         border:2px solid ${(props:any) => props.danger ? "#EB5E55" : "#0086A8"};
     }  
+`
+
+export const FieldList = styles.div`
+display: flex;
+flex-flow: column nowrap;
+position: relative;
+&:focus{
+    border: 2px solid red;
 }
 
 .block_for_select{
@@ -283,7 +284,7 @@ export const Selected = styles(ReactSelect)`
     width: 440px;
     height: 50px;
     
-    border: 2px solid ${(props:any) => props.danger ? "#EB5E55" : "#0086A8"};
+    border: 2px solid ${(props:any) => props.danger ? "#EB5E55" : "#E3E3E3"};
     border-radius: 8px;
     appearance: none;
     background: none;

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfileAsync } from '../store/mainSlice'
-import { Flex, FormWrapper, Error, IconArrow, FieldList, Label } from '../style/components'
+import { Flex, FormWrapper, Error, IconArrow, FieldList, Label, InputMasks } from '../style/components'
 import { ButtonDefault } from '../style/components/ButtonDefault'
 import { InputDefault } from '../style/components/InputDefault'
 import { SelectDefault } from '../style/components/SelectDefault'
 import {useForm} from 'react-hook-form'
-import InputMask from 'react-input-mask';
 
 export const Form = () => {
     const dispatch = useDispatch();
@@ -64,7 +63,7 @@ export const Form = () => {
                 :
                     <Label>Номер телефона *</Label>
                 }
-                <InputMask className="InputMask"
+                <InputMasks className="InputMask"
                 {...register('number',{
                     required: "поле номера обязательно для заполнения",
                     minLength: {
@@ -83,17 +82,18 @@ export const Form = () => {
                 value={phone}
                 onChange={(e:any)=>setPhone(e.target.value)}
                 type="text"
+                danger={errors?.number ? 'danger' : ''}
                 />
             <Error>{errors?.number ? errors.number.message : ''}</Error>
             </FieldList>
         </Flex>
         <Flex style={{marginTop: '4px'}}>
             <InputDefault register={register('email',{
-                required: "поле имени обязательно для заполнения",
+                required: "поле email обязательно для заполнения",
                 pattern: /[@]/
               })} label={'E-mail *'} placeholder={'example@skdesign.ru'}  error={errors?.email}/>
             <InputDefault register={register('links',{
-                required: "поле имени обязательно для заполнения",
+                required: "необходимо указать ссылку на профиль",
                 minLength: {
                   value:3 ,
                   message: 'минимальная длина поля для ссылки 3 символа'
